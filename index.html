@@ -9,56 +9,58 @@
   <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 </head>
 
-<body>
+<body id='drum-machine'>
+
+  <span id="display">Display</span>
 
   <div class="keys">
-    <div data-key="65" class="key">
-      <kbd>A</kbd>
+    <div data-key="81" class="key drum-pad">
+      <kbd>Q</kbd>
       <span class="sound">clap</span>
     </div>
-    <div data-key="83" class="key">
-      <kbd>S</kbd>
+    <div data-key="87" class="key drum-pad">
+      <kbd>W</kbd>
       <span class="sound">hihat</span>
     </div>
-    <div data-key="68" class="key">
-      <kbd>D</kbd>
+    <div data-key="69" class="key drum-pad">
+      <kbd>E</kbd>
       <span class="sound">kick</span>
     </div>
-    <div data-key="70" class="key">
-      <kbd>F</kbd>
+    <div data-key="65" class="key drum-pad">
+      <kbd>A</kbd>
       <span class="sound">openhat</span>
     </div>
-    <div data-key="71" class="key">
-      <kbd>G</kbd>
+    <div data-key="83" class="key drum-pad">
+      <kbd>S</kbd>
       <span class="sound">boom</span>
     </div>
-    <div data-key="72" class="key">
-      <kbd>H</kbd>
+    <div data-key="68" class="key drum-pad">
+      <kbd>D</kbd>
       <span class="sound">ride</span>
     </div>
-    <div data-key="74" class="key">
-      <kbd>J</kbd>
+    <div data-key="90" class="key drum-pad">
+      <kbd>Z</kbd>
       <span class="sound">snare</span>
     </div>
-    <div data-key="75" class="key">
-      <kbd>K</kbd>
+    <div data-key="88" class="key drum-pad">
+      <kbd>X</kbd>
       <span class="sound">tom</span>
     </div>
-    <div data-key="76" class="key">
-      <kbd>L</kbd>
+    <div data-key="67" class="key drum-pad">
+      <kbd>C</kbd>
       <span class="sound">tink</span>
     </div>
   </div>
 
-  <audio data-key="65" src="sounds/clap.wav"></audio>
-  <audio data-key="83" src="sounds/hihat.wav"></audio>
-  <audio data-key="68" src="sounds/kick.wav"></audio>
-  <audio data-key="70" src="sounds/openhat.wav"></audio>
-  <audio data-key="71" src="sounds/boom.wav"></audio>
-  <audio data-key="72" src="sounds/ride.wav"></audio>
-  <audio data-key="74" src="sounds/snare.wav"></audio>
-  <audio data-key="75" src="sounds/tom.wav"></audio>
-  <audio data-key="76" src="sounds/tink.wav"></audio>
+  <audio data-key="81" src="sounds/clap.wav" class='clip' id='Q'></audio>
+  <audio data-key="87" src="sounds/hihat.wav" class='clip' id='W'></audio>
+  <audio data-key="69" src="sounds/kick.wav" class='clip' id='E'></audio>
+  <audio data-key="65" src="sounds/openhat.wav" class='clip' id='A'></audio>
+  <audio data-key="83" src="sounds/boom.wav" class='clip' id='S'></audio>
+  <audio data-key="68" src="sounds/ride.wav" class='clip' id='D'></audio>
+  <audio data-key="90" src="sounds/snare.wav" class='clip' id='Z'></audio>
+  <audio data-key="88" src="sounds/tom.wav" class='clip' id='X'></audio>
+  <audio data-key="67" src="sounds/tink.wav" class='clip' id='C'></audio>
 
   <script>
     function removeTransition(e) {
@@ -72,6 +74,9 @@
       key.classList.add('playing');
       audio.currentTime = 0;
       audio.play();
+
+      const name = key.querySelector('.sound').innerText;
+      document.getElementById('display').innerText = name;
     }
     const keys = Array.from(document.querySelectorAll('.key'));
     keys.forEach(key => key.addEventListener('transitionend', removeTransition));
